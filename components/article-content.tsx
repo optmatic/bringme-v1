@@ -213,28 +213,15 @@ export function ArticleContent({ article }: ArticleContentProps) {
               </div>
 
               {article.feature_image && (
-                <div className="lg:col-span-1 flex items-start">
-                  <div className="relative w-full aspect-[4/3] overflow-visible">
-                    {/* Blurred colored halo */}
-                    <div
-                      className="absolute inset-0 -top-4 -left-4 -right-4 -bottom-4 z-0 rounded-lg"
-                      style={{
-                        background:
-                          "radial-gradient(circle at 60% 40%, #bbf7d0 0%, #a3e635 60%, transparent 100%)",
-                        filter: "blur(24px)",
-                        opacity: 0.7,
-                      }}
-                    />
+                <div className="lg:col-span-1">
+                  <div className="relative w-full aspect-[4/3]">
                     <Image
                       src={article.feature_image}
                       alt=""
                       fill
-                      className="object-cover rounded-lg z-10"
+                      className="object-cover shadow-sm shadow-green-900"
                       priority
                       role="presentation"
-                      style={{
-                        boxShadow: "0 2px 16px 0 rgba(34,197,94,0.10)",
-                      }}
                     />
                   </div>
                 </div>
@@ -259,7 +246,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
           {/* Article Footer */}
           <footer
-            className="inline-block bg-green-50/50 p-3 border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]"
+            className="inline-block  p-3 border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]"
             style={{
               borderImage:
                 "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
