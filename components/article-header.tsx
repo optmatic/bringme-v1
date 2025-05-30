@@ -193,7 +193,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                 <div className="hidden sm:flex items-center justify-between py-3">
                   {/* Article Meta */}
                   <div className="flex items-center gap-4 min-w-0 flex-1">
-                    <div className="w-8 h-8 bg-green-100 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-green-100 flex items-center justify-center flex-shrink-0">
                       <User
                         className="h-4 w-4 text-green-700"
                         aria-hidden="true"

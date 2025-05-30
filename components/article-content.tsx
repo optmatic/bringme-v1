@@ -135,7 +135,14 @@ export function ArticleContent({ article }: ArticleContentProps) {
           {/* Article Header */}
           <header
             ref={headerRef}
-            className={ds.components.cards.header + " overflow-hidden"}
+            className={
+              ds.components.cards.header +
+              " overflow-hidden border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]"
+            }
+            style={{
+              borderImage:
+                "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+            }}
           >
             {/* Meta Info Bar */}
             <div className="flex items-center light-green-bg justify-between px-8 py-2 lg:px-10 lg:py-4 border-b border-gray-100/80 bg-gray-50/50">
@@ -207,12 +214,18 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
               {article.feature_image && (
                 <div className="lg:col-span-1">
-                  <div className="relative w-full aspect-[4/3] overflow-hidden light-green-bg">
+                  <div
+                    className="relative w-full aspect-[4/3] overflow-hidden light-green-bg border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]"
+                    style={{
+                      borderImage:
+                        "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+                    }}
+                  >
                     <Image
                       src={article.feature_image}
                       alt=""
                       fill
-                      className="object-contain"
+                      className="object-cover"
                       priority
                       role="presentation"
                     />
@@ -224,7 +237,11 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
           {/* Article Content */}
           <article
-            className={`prose prose-lg lg:prose-xl max-w-none ${ds.components.cards.article} p-4 sm:p-6 lg:p-8`}
+            className={`prose prose-lg lg:prose-xl max-w-none ${ds.components.cards.article} border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)] p-4 sm:p-6 lg:p-8`}
+            style={{
+              borderImage:
+                "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+            }}
             ref={contentRef}
           >
             <div
@@ -234,7 +251,13 @@ export function ArticleContent({ article }: ArticleContentProps) {
           </article>
 
           {/* Article Footer */}
-          <footer className="inline-block bg-green-50/50 p-3 border border-green-100/50 rounded-md">
+          <footer
+            className="inline-block bg-green-50/50 p-3 border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]"
+            style={{
+              borderImage:
+                "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+            }}
+          >
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs text-slate-700 font-inter">Tagged:</span>
               {article.tags.map((tag) => (
@@ -258,12 +281,17 @@ export function ArticleContent({ article }: ArticleContentProps) {
               position: "sticky",
               top: `${headerHeight}px`,
               zIndex: 20,
-              marginTop: "1rem",
+              // marginTop: "1rem",
             }}
           >
             {/* Table of Contents */}
             <div
-              className={`${ds.components.cards.sidebar} p-4 sm:p-6 relative overflow-hidden bg-white`}
+              className={`${ds.components.cards.sidebar} p-4 sm:p-6 relative overflow-hidden light-green-bg border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
+              style={{
+                borderImage:
+                  "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+                background: "#f7fee7",
+              }}
             >
               <div>
                 <h3 className="text-lg font-bold text-slate-950 mb-4 font-gothic">
@@ -336,7 +364,12 @@ export function ArticleContent({ article }: ArticleContentProps) {
             {/* Action Buttons */}
             <div className="space-y-3">
               <div
-                className={`${ds.components.cards.sidebar} p-0 overflow-hidden`}
+                className={`${ds.components.cards.sidebar} p-0 overflow-hidden border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
+                style={{
+                  borderImage:
+                    "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+                  background: "#f7fee7",
+                }}
               >
                 <button
                   onClick={scrollToTop}
@@ -348,7 +381,12 @@ export function ArticleContent({ article }: ArticleContentProps) {
               </div>
 
               <div
-                className={`${ds.components.cards.sidebar} p-0 overflow-hidden`}
+                className={`${ds.components.cards.sidebar} p-0 overflow-hidden border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
+                style={{
+                  borderImage:
+                    "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
+                  background: "#f7fee7",
+                }}
               >
                 <button
                   onClick={shareArticle}
