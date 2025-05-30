@@ -95,10 +95,20 @@ export function Footer() {
           <div className="mt-8 pt-6 border-t border-gray-200/60">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <p className="text-[10px] sm:text-xs text-slate-600 font-inter">
-                © 2024 Bring Me Insight. All rights reserved.
+                © {new Date().getFullYear()} Bring Me Insight. All rights
+                reserved.
               </p>
               <p className="text-[10px] sm:text-xs text-slate-600 font-inter">
-                Made with 💚 in Australia
+                Australia-made by{" "}
+                <a
+                  href="https://optmatic.com.au"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-800 hover:text-green-900 transition-colors duration-200 italic uppercase font-bold mr-1"
+                >
+                  Optmatic
+                </a>{" "}
+                <span className="text-green-600">💚</span>
               </p>
             </div>
           </div>
