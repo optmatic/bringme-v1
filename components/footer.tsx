@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -26,25 +26,30 @@ export function Footer() {
       </div>
 
       <div className="relative bg-white/85 backdrop-blur-sm border border-gray-200/60">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Brand Section */}
             <div className="space-y-4">
               <Link href="/" className="inline-block group">
                 <div className="logo-3d-border px-3 py-1.5 transition-all duration-300 group-hover:bg-black group-hover:text-white relative overflow-hidden">
-                  <h3 className="text-base sm:text-lg font-bold font-bokor relative z-10">Bring Me Insight</h3>
+                  <h3 className="text-base sm:text-lg font-bold font-bokor relative z-10">
+                    Bring Me Insight
+                  </h3>
                   <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 via-lime-300/10 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 </div>
               </Link>
               <p className="text-xs sm:text-sm text-slate-700 font-inter leading-relaxed">
-                Independent journalism dedicated to providing insightful analysis on Australian and global politics,
-                society, and culture.
+                Independent journalism dedicated to providing insightful
+                analysis on Australian and global politics, society, and
+                culture.
               </p>
             </div>
 
             {/* Quick Links */}
             <div className="space-y-4">
-              <h4 className="text-sm font-semibold text-gray-900 font-gothic">Quick Links</h4>
+              <h4 className="text-sm font-semibold text-gray-900 font-gothic">
+                Quick Links
+              </h4>
               <nav className="grid grid-cols-1 xs:grid-cols-2 gap-2">
                 <Link
                   href="/about"
@@ -92,7 +97,9 @@ export function Footer() {
               <p className="text-[10px] sm:text-xs text-slate-600 font-inter">
                 © 2024 Bring Me Insight. All rights reserved.
               </p>
-              <p className="text-[10px] sm:text-xs text-slate-600 font-inter">Made with ❤️ in Australia</p>
+              <p className="text-[10px] sm:text-xs text-slate-600 font-inter">
+                Made with 💚 in Australia
+              </p>
             </div>
           </div>
         </div>
@@ -103,5 +110,5 @@ export function Footer() {
         <div className="h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
       </div>
     </footer>
-  )
+  );
 }

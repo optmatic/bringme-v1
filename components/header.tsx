@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-import { cn } from "@/lib/utils"
-import { ds } from "@/lib/design-system"
-import { X, ChevronRight } from "lucide-react"
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { ds } from "@/lib/design-system";
+import { X, ChevronRight } from "lucide-react";
 
 // Updated navigation items - removed MEDIA
 const navItems = [
@@ -13,39 +13,45 @@ const navItems = [
   { name: "POLITICS", href: "/politics" },
   { name: "FEED", href: "/feed" },
   { name: "DISCOVER", href: "/discover" },
-]
+];
 
 interface HeaderProps {
-  activeCategory?: string
+  activeCategory?: string;
 }
 
 export function Header({ activeCategory }: HeaderProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(-1)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
 
   // Convert activeCategory to uppercase to match navItems format
-  const activeCategoryUpper = activeCategory ? activeCategory.toUpperCase() : undefined
+  const activeCategoryUpper = activeCategory
+    ? activeCategory.toUpperCase()
+    : undefined;
 
   // Find active index for animation
   useEffect(() => {
     if (activeCategoryUpper) {
-      const index = navItems.findIndex((item) => item.name === activeCategoryUpper)
-      setActiveIndex(index)
+      const index = navItems.findIndex(
+        (item) => item.name === activeCategoryUpper
+      );
+      setActiveIndex(index);
     }
-  }, [activeCategoryUpper])
+  }, [activeCategoryUpper]);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <header className={`${ds.components.cards.header} sticky top-0 z-50 relative`}>
+    <header
+      className={`${ds.components.cards.header} sticky top-0 z-50 relative`}
+    >
       {/* Futuristic gradient accent line */}
       <div className="h-0.5 bg-gradient-to-r from-green-400 via-lime-300 to-green-500 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Main Header Row */}
         <div className="flex items-center justify-between py-4 sm:py-6">
           {/* Logo Section */}
@@ -64,7 +70,10 @@ export function Header({ activeCategory }: HeaderProps) {
           </div>
 
           {/* Desktop Topic Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2" aria-label="Topic navigation">
+          <nav
+            className="hidden lg:flex items-center space-x-1 xl:space-x-2"
+            aria-label="Topic navigation"
+          >
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -73,7 +82,7 @@ export function Header({ activeCategory }: HeaderProps) {
                   "px-3 py-2 text-sm font-medium transition-all duration-200 font-inter border border-transparent",
                   activeCategoryUpper === item.name
                     ? "bg-gradient-to-r from-green-100 via-lime-50 to-green-100 text-green-800 border-green-200/60"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-gray-100 hover:border-gray-200/60",
+                    : "text-slate-700 hover:text-slate-900 hover:bg-gray-100 hover:border-gray-200/60"
                 )}
               >
                 {item.name}
@@ -95,11 +104,16 @@ export function Header({ activeCategory }: HeaderProps) {
         <div
           className={cn(
             "lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out",
-            isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+            isMobileMenuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           )}
         >
           {/* Backdrop with Australian flora pattern */}
-          <div className="absolute inset-0 bg-white/95 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}>
+          <div
+            className="absolute inset-0 bg-white/95 backdrop-blur-sm"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             <div
               className="absolute inset-0 opacity-[0.05]"
               style={{
@@ -114,9 +128,15 @@ export function Header({ activeCategory }: HeaderProps) {
           <div className="relative h-full flex flex-col">
             {/* Header - PROPERLY ALIGNED */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200/60">
-              <Link href="/" className="group" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link
+                href="/"
+                className="group"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 <div className="logo-3d-border px-3 py-1.5 transition-all duration-300 group-hover:bg-black group-hover:text-white relative overflow-hidden">
-                  <h1 className="text-xl font-bold tracking-tight font-bokor relative z-10">Bring Me Insight</h1>
+                  <h1 className="text-xl font-bold tracking-tight font-bokor relative z-10">
+                    Bring Me Insight
+                  </h1>
                 </div>
               </Link>
               <button
@@ -131,7 +151,7 @@ export function Header({ activeCategory }: HeaderProps) {
             <nav className="flex-1 py-8 px-4">
               <ul className="space-y-6">
                 {navItems.map((item, index) => {
-                  const isActive = activeCategoryUpper === item.name
+                  const isActive = activeCategoryUpper === item.name;
                   return (
                     <li key={item.name} className="relative">
                       <Link
@@ -139,14 +159,16 @@ export function Header({ activeCategory }: HeaderProps) {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={cn(
                           "flex items-center group py-3 transition-all duration-300",
-                          isActive ? "text-green-600" : "text-slate-700",
+                          isActive ? "text-green-600" : "text-slate-700"
                         )}
                       >
                         {/* Animated indicator */}
                         <div
                           className={cn(
                             "absolute left-0 w-1.5 h-12 bg-gradient-to-b from-green-400 to-lime-300 rounded-r-full transition-all duration-300",
-                            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-50",
+                            isActive
+                              ? "opacity-100"
+                              : "opacity-0 group-hover:opacity-50"
                           )}
                         />
 
@@ -159,7 +181,9 @@ export function Header({ activeCategory }: HeaderProps) {
                         <ChevronRight
                           className={cn(
                             "ml-auto h-5 w-5 transition-all duration-300",
-                            isActive ? "opacity-100 text-green-500" : "opacity-0 group-hover:opacity-70 text-slate-400",
+                            isActive
+                              ? "opacity-100 text-green-500"
+                              : "opacity-0 group-hover:opacity-70 text-slate-400"
                           )}
                         />
                       </Link>
@@ -167,7 +191,7 @@ export function Header({ activeCategory }: HeaderProps) {
                       {/* Animated underline */}
                       <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent mt-3 opacity-70" />
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </nav>
@@ -180,5 +204,5 @@ export function Header({ activeCategory }: HeaderProps) {
         </div>
       </div>
     </header>
-  )
+  );
 }
