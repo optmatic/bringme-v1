@@ -213,21 +213,28 @@ export function ArticleContent({ article }: ArticleContentProps) {
               </div>
 
               {article.feature_image && (
-                <div className="lg:col-span-1">
-                  <div
-                    className="relative w-full aspect-[4/3] overflow-hidden light-green-bg border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]"
-                    style={{
-                      borderImage:
-                        "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
-                    }}
-                  >
+                <div className="lg:col-span-1 flex items-start">
+                  <div className="relative w-full aspect-[4/3] overflow-visible">
+                    {/* Blurred colored halo */}
+                    <div
+                      className="absolute inset-0 -top-4 -left-4 -right-4 -bottom-4 z-0 rounded-lg"
+                      style={{
+                        background:
+                          "radial-gradient(circle at 60% 40%, #bbf7d0 0%, #a3e635 60%, transparent 100%)",
+                        filter: "blur(24px)",
+                        opacity: 0.7,
+                      }}
+                    />
                     <Image
                       src={article.feature_image}
                       alt=""
                       fill
-                      className="object-cover"
+                      className="object-cover rounded-lg z-10"
                       priority
                       role="presentation"
+                      style={{
+                        boxShadow: "0 2px 16px 0 rgba(34,197,94,0.10)",
+                      }}
                     />
                   </div>
                 </div>
@@ -276,7 +283,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
         {/* Sidebar */}
         <div className="w-full xl:col-span-3 mt-8 xl:mt-0">
           <div
-            className="space-y-6 transition-all duration-300 ease-in-out"
+            className="space-y-6 transition-all duration-300 ease-in-out light-green-bg"
             style={{
               position: "sticky",
               top: `${headerHeight}px`,
@@ -284,13 +291,12 @@ export function ArticleContent({ article }: ArticleContentProps) {
               // marginTop: "1rem",
             }}
           >
-            {/* Table of Contents */}
+            {/* Table of Contents - moved to top */}
             <div
-              className={`${ds.components.cards.sidebar} p-4 sm:p-6 relative overflow-hidden light-green-bg border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
+              className={`${ds.components.cards.sidebar} p-4 sm:p-6 relative overflow-visible border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
               style={{
                 borderImage:
                   "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
-                background: "#f7fee7",
               }}
             >
               <div>
@@ -368,12 +374,11 @@ export function ArticleContent({ article }: ArticleContentProps) {
                 style={{
                   borderImage:
                     "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
-                  background: "#f7fee7",
                 }}
               >
                 <button
                   onClick={scrollToTop}
-                  className="flex items-center gap-2 w-full p-4 text-green-600 hover:bg-green-50/50 transition-colors font-inter text-sm"
+                  className="flex items-center gap-2 w-full p-4 transition-colors font-inter text-sm"
                 >
                   <ArrowUp className="h-4 w-4" />
                   <span>Back to top</span>
@@ -385,7 +390,6 @@ export function ArticleContent({ article }: ArticleContentProps) {
                 style={{
                   borderImage:
                     "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
-                  background: "#f7fee7",
                 }}
               >
                 <button
