@@ -301,3 +301,11 @@ html {
 .toc-toggle {
   @apply ml-2 p-1.5 text-gray-400 hover:text-gray-600 transition-colors duration-200;
 }
+
+.flora-fauna-bg {
+  @apply bg-gradient-to-br from-green-50/30 via-lime-50/20 to-green-50/30 border border-gray-200/60 rounded-xl shadow-sm;
+}
+
+.light-green-bg {
+  @apply bg-gradient-to-br from-green-50/30 via-lime-50/20 to-green-50/30;
+}

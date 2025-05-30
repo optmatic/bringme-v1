@@ -138,7 +138,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
             className={ds.components.cards.header + " overflow-hidden"}
           >
             {/* Meta Info Bar */}
-            <div className="flex items-center justify-between p-8 lg:p-10 border-b border-gray-100/80 bg-gray-50/50">
+            <div className="flex items-center light-green-bg justify-between px-8 py-2 lg:px-10 lg:py-4 border-b border-gray-100/80 bg-gray-50/50">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-lime-300 flex items-center justify-center shadow-sm">
                   <User className="h-5 w-5 text-white" aria-hidden="true" />
@@ -190,7 +190,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
             </div>
 
             {/* Title, Excerpt & Image Container */}
-            <div className="flora-fauna-bg grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 lg:p-8 rounded-xl shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 lg:px-8 lg:py-12 light-green-bg">
               <div className="lg:col-span-2 space-y-6">
                 <h1
                   className={
@@ -200,19 +200,19 @@ export function ArticleContent({ article }: ArticleContentProps) {
                 >
                   {article.title}
                 </h1>
-                <p className="text-base lg:text-lg text-slate-700 leading-relaxed font-inter font-light italic">
+                <p className="text-sm lg:text-lg text-slate-700 leading-relaxed font-inter font-light">
                   {article.excerpt}
                 </p>
               </div>
 
               {article.feature_image && (
                 <div className="lg:col-span-1">
-                  <div className="relative w-full aspect-[4/3] overflow-hidden shadow-sm bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-200/60">
+                  <div className="relative w-full aspect-[4/3] overflow-hidden light-green-bg">
                     <Image
                       src={article.feature_image}
                       alt=""
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       priority
                       role="presentation"
                     />

@@ -1,6 +1,29 @@
 // Design System Configuration
 // Centralized styling configuration for the Bring Me Insight publication
 
+// Type definitions
+// ----------------
+type HeadingLevel = "h1" | "h2" | "h3";
+type HeadingSize = "sm" | "md" | "lg" | "base";
+type BackgroundStyle = "gradient" | "flora-fauna" | "solid";
+
+interface HeadingStyles {
+  background: string;
+  border: string;
+  display: string;
+  font: string;
+}
+interface BackgroundConfig {
+  className: string;
+  overlay: any;
+}
+interface TextColorConfig {
+  primary: string;
+  secondary: string;
+  badge: string;
+  icon: string;
+}
+
 export const designSystem = {
   // Color Palette
   colors: {
@@ -117,6 +140,12 @@ export const designSystem = {
   components: {
     // Heading backgrounds
     headings: {
+      h1: {
+        background: "",
+        border: "",
+        display: "inline-block",
+        font: "font-black font-gothic",
+      },
       h2: {
         background: "bg-gradient-to-r from-green-100/60 to-green-50/20",
         border: "", // No rounded corners - straight edges
@@ -143,21 +172,23 @@ export const designSystem = {
 
     // Badges
     badges: {
-      category: "bg-gradient-to-r from-green-100 via-lime-50 to-green-100 text-green-800 border border-green-200/60",
+      category:
+        "bg-gradient-to-r from-green-100 via-lime-50 to-green-100 text-green-800 border border-green-200/60",
       tag: "bg-white text-green-800 border border-green-200/60",
     },
 
     // Cards - Brutalist straight edges with subtle borders
     cards: {
       article: "bg-white shadow-sm border border-gray-200/60", // Straight edges, subtle border
-      sidebar: "bg-white/95 backdrop-blur-sm shadow-sm border border-gray-200/50", // Straight edges, subtle border
+      sidebar:
+        "bg-white/95 backdrop-blur-sm shadow-sm border border-gray-200/50", // Straight edges, subtle border
       header: "bg-white shadow-sm border border-gray-100/80", // Straight edges, subtle border
     },
 
     // Article Info Bar Configuration
     articleInfoBar: {
       // Background style options: 'gradient' | 'flora-fauna' | 'solid'
-      backgroundStyle: "flora-fauna", // Change this to switch between styles
+      backgroundStyle: "flora-fauna" as BackgroundStyle,
 
       // Background configurations
       backgrounds: {
@@ -179,7 +210,7 @@ export const designSystem = {
           className: "bg-green-500",
           overlay: null,
         },
-      },
+      } as Record<BackgroundStyle, BackgroundConfig>,
 
       // Text colors for different backgrounds
       textColors: {
@@ -201,7 +232,7 @@ export const designSystem = {
           badge: "bg-white/20 text-white border-white/30",
           icon: "bg-white/20",
         },
-      },
+      } as Record<BackgroundStyle, TextColorConfig>,
     },
   },
 
@@ -219,36 +250,38 @@ export const designSystem = {
       fast: "transition-all duration-150",
     },
   },
-}
+};
 
 // Helper function to get design system values
-export const ds = designSystem
+export const ds = designSystem;
 
 // Utility functions for common combinations
-export const getHeadingClasses = (level: "h1" | "h2" | "h3", size?: "sm" | "md" | "lg" | "base") => {
-  const baseClasses = ds.components.headings[level]
+export const getHeadingClasses = (level: HeadingLevel, size?: HeadingSize) => {
+  const baseClasses = ds.components.headings[level];
   if (level === "h1") {
-    const sizeClass = size ? ds.typography.sizes.h1[size as "sm" | "md" | "lg"] : ds.typography.sizes.h1.lg
-    return `${sizeClass} ${baseClasses?.font || "font-black font-gothic"}` // Changed from font-bold to font-black
+    const sizeClass = size
+      ? ds.typography.sizes.h1[size as "sm" | "md" | "lg"]
+      : ds.typography.sizes.h1.lg;
+    return `${sizeClass} ${baseClasses?.font || "font-black font-gothic"}`; // Changed from font-bold to font-black
   }
-  return Object.values(baseClasses || {}).join(" ")
-}
+  return Object.values(baseClasses || {}).join(" ");
+};
 
 export const getLinkClasses = () => {
-  const linkStyles = ds.components.links.inline
-  return Object.values(linkStyles).join(" ")
-}
+  const linkStyles = ds.components.links.inline;
+  return Object.values(linkStyles).join(" ");
+};
 
 // Helper function to get article info bar styling
 export const getArticleInfoBarStyles = () => {
-  const config = ds.components.articleInfoBar
-  const currentStyle = config.backgroundStyle
-  const background = config.backgrounds[currentStyle]
-  const textColors = config.textColors[currentStyle]
+  const config = ds.components.articleInfoBar;
+  const currentStyle = config.backgroundStyle as BackgroundStyle;
+  const background = config.backgrounds[currentStyle];
+  const textColors = config.textColors[currentStyle];
 
   return {
     background,
     textColors,
     currentStyle,
-  }
-}
+  };
+};
