@@ -237,10 +237,10 @@ html {
 
 /* === Design System Prose Overrides === */
 .prose h2 {
-  @apply text-3xl bg-gradient-to-r from-green-100/60 to-green-50/20 font-black font-gothic mt-8 mb-5 px-6 py-2;
+  @apply text-3xl bg-gradient-to-r from-green-100/60 to-green-50/20 font-black font-gothic mt-8 mb-5 px-6 py-2 inline-block rounded-md;
 }
 .prose h3 {
-  @apply text-xl bg-gradient-to-r from-lime-100/40 to-lime-50/20 font-bold font-gothic mt-6 mb-4 px-3 py-1.5;
+  @apply text-xl bg-gradient-to-r from-lime-100/40 to-lime-50/20 font-bold font-gothic mt-6 mb-4 px-3 py-1.5 inline-block rounded;
 }
 .prose a {
   @apply text-green-600 underline decoration-green-400 decoration-2 hover:text-green-700 hover:decoration-green-500 transition-colors duration-200;
@@ -266,4 +266,33 @@ html {
 }
 .prose img {
   @apply rounded-md shadow-sm my-6;
+}
+
+/* === Table of Contents Styles === */
+.toc-h2 {
+  @apply text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors duration-200 px-2 py-1.5 rounded-md hover:bg-gray-50/50;
+}
+
+.toc-h2-active {
+  @apply text-green-600 font-medium;
+}
+
+.toc-h3 {
+  @apply text-xs text-slate-600 hover:text-slate-800 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-50/50;
+}
+
+.toc-h3-active {
+  @apply text-green-600 font-medium;
+}
+
+.toc-container {
+  @apply space-y-1;
+}
+
+.toc-subsection {
+  @apply ml-4 mt-1 space-y-1 border-l border-gray-200 pl-3;
+}
+
+.toc-toggle {
+  @apply ml-2 p-1.5 text-gray-400 hover:text-gray-600 transition-colors duration-200;
 }

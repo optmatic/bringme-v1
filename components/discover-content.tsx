@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ExternalLink, Clock, ThumbsUp, Play, Newspaper } from "lucide-react"
-import Image from "next/image"
-import { ds } from "@/lib/design-system"
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ExternalLink, Clock, ThumbsUp, Play, Newspaper } from "lucide-react";
+import Image from "next/image";
+import { ds } from "@/lib/design-system";
 
 // Sample curated content - in a real app, this would come from your CMS or database
 const curatedContent = {
@@ -15,8 +15,10 @@ const curatedContent = {
       title: "The Future of Australian Democracy in a Changing World",
       source: "The Conversation",
       url: "https://example.com/article1",
-      excerpt: "An insightful analysis of how democratic institutions are evolving in response to global challenges.",
-      image: "/placeholder.svg?height=200&width=400&query=Australian parliament democracy future",
+      excerpt:
+        "An insightful analysis of how democratic institutions are evolving in response to global challenges.",
+      image:
+        "/placeholder.svg?height=200&width=400&query=Australian parliament democracy future",
       date: "April 10, 2024",
       readTime: "8 min",
       tags: ["Democracy", "Politics"],
@@ -27,8 +29,10 @@ const curatedContent = {
       title: "Climate Change and Australia's Economic Future",
       source: "The Guardian",
       url: "https://example.com/article2",
-      excerpt: "How climate policy will shape Australia's economic landscape over the next decade.",
-      image: "/placeholder.svg?height=200&width=400&query=Australian renewable energy climate economy",
+      excerpt:
+        "How climate policy will shape Australia's economic landscape over the next decade.",
+      image:
+        "/placeholder.svg?height=200&width=400&query=Australian renewable energy climate economy",
       date: "March 28, 2024",
       readTime: "12 min",
       tags: ["Climate", "Economics"],
@@ -41,7 +45,8 @@ const curatedContent = {
       url: "https://example.com/article3",
       excerpt:
         "Exploring the valuable intersection between traditional knowledge and contemporary scientific approaches.",
-      image: "/placeholder.svg?height=200&width=400&query=Indigenous Australian knowledge science collaboration",
+      image:
+        "/placeholder.svg?height=200&width=400&query=Indigenous Australian knowledge science collaboration",
       date: "April 5, 2024",
       readTime: "10 min",
       tags: ["Indigenous", "Science"],
@@ -54,7 +59,8 @@ const curatedContent = {
       title: "Understanding Australia's Role in the Indo-Pacific",
       creator: "Lowy Institute",
       url: "https://youtube.com/watch?v=example1",
-      thumbnail: "/placeholder.svg?height=200&width=400&query=Australia Indo-Pacific relations diplomacy",
+      thumbnail:
+        "/placeholder.svg?height=200&width=400&query=Australia Indo-Pacific relations diplomacy",
       duration: "18:24",
       date: "March 15, 2024",
       tags: ["Foreign Policy", "Indo-Pacific"],
@@ -66,7 +72,8 @@ const curatedContent = {
       title: "The History of Australian Political Movements",
       creator: "Australian Politics Explained",
       url: "https://youtube.com/watch?v=example2",
-      thumbnail: "/placeholder.svg?height=200&width=400&query=Australian political history movements protest",
+      thumbnail:
+        "/placeholder.svg?height=200&width=400&query=Australian political history movements protest",
       duration: "24:15",
       date: "February 28, 2024",
       tags: ["History", "Politics"],
@@ -78,7 +85,8 @@ const curatedContent = {
       title: "Australia's Housing Crisis Explained",
       creator: "ABC News In-depth",
       url: "https://abc.net.au/example3",
-      thumbnail: "/placeholder.svg?height=200&width=400&query=Australian housing crisis urban development",
+      thumbnail:
+        "/placeholder.svg?height=200&width=400&query=Australian housing crisis urban development",
       duration: "32:10",
       date: "April 2, 2024",
       tags: ["Housing", "Economics"],
@@ -127,17 +135,20 @@ const curatedContent = {
       type: "post",
     },
   ],
-}
+};
 
 export function DiscoverContent() {
-  const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState("all");
 
-  // Combine all content types for the "All" tab
+  // Combine all content types for the "All" tab with deterministic ordering
   const allContent = [
     ...curatedContent.articles.map((item) => ({ ...item, type: "article" })),
     ...curatedContent.media.map((item) => ({ ...item, type: "media" })),
     ...curatedContent.social.map((item) => ({ ...item, type: "social" })),
-  ].sort(() => Math.random() - 0.5) // Simple randomization for mixed content
+  ].sort((a, b) => {
+    // Sort by date in descending order (newest first)
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
   return (
     <section>
@@ -182,7 +193,10 @@ export function DiscoverContent() {
         <TabsContent value="articles" className="mt-0">
           <div className="grid grid-cols-1 gap-6">
             {curatedContent.articles.map((article) => (
-              <ContentCard key={article.id} item={{ ...article, type: "article" }} />
+              <ContentCard
+                key={article.id}
+                item={{ ...article, type: "article" }}
+              />
             ))}
           </div>
         </TabsContent>
@@ -198,17 +212,20 @@ export function DiscoverContent() {
         <TabsContent value="social" className="mt-0">
           <div className="grid grid-cols-1 gap-6">
             {curatedContent.social.map((social) => (
-              <ContentCard key={social.id} item={{ ...social, type: "social" }} />
+              <ContentCard
+                key={social.id}
+                item={{ ...social, type: "social" }}
+              />
             ))}
           </div>
         </TabsContent>
       </Tabs>
     </section>
-  )
+  );
 }
 
 interface ContentCardProps {
-  item: any
+  item: any;
 }
 
 function ContentCard({ item }: ContentCardProps) {
@@ -216,7 +233,12 @@ function ContentCard({ item }: ContentCardProps) {
   switch (item.type) {
     case "article":
       return (
-        <a href={item.url} target="_blank" rel="noopener noreferrer" className="block group">
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group"
+        >
           <article
             className={`${ds.components.cards.article} hover:shadow-md transition-all duration-300 overflow-hidden hover:border-green-300/60`}
           >
@@ -251,7 +273,9 @@ function ContentCard({ item }: ContentCardProps) {
                   {item.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-700 mb-4 flex-grow">{item.excerpt}</p>
+                <p className="text-xs sm:text-sm text-slate-700 mb-4 flex-grow">
+                  {item.excerpt}
+                </p>
 
                 <div className="flex items-center justify-between mt-auto">
                   <div className="flex items-center gap-3 text-xs text-slate-500">
@@ -263,18 +287,24 @@ function ContentCard({ item }: ContentCardProps) {
                   </div>
 
                   <div className="flex items-center text-green-600 text-xs font-medium">
-                    Read <ExternalLink className="h-3 w-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                    Read{" "}
+                    <ExternalLink className="h-3 w-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
               </div>
             </div>
           </article>
         </a>
-      )
+      );
 
     case "media":
       return (
-        <a href={item.url} target="_blank" rel="noopener noreferrer" className="block group">
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group"
+        >
           <article
             className={`${ds.components.cards.article} hover:shadow-md transition-all duration-300 overflow-hidden hover:border-green-300/60`}
           >
@@ -318,18 +348,24 @@ function ContentCard({ item }: ContentCardProps) {
                   <div className="text-xs text-slate-500">{item.date}</div>
 
                   <div className="flex items-center text-green-600 text-xs font-medium">
-                    Watch <ExternalLink className="h-3 w-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                    Watch{" "}
+                    <ExternalLink className="h-3 w-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
               </div>
             </div>
           </article>
         </a>
-      )
+      );
 
     case "social":
       return (
-        <a href={item.url} target="_blank" rel="noopener noreferrer" className="block group">
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group"
+        >
           <article
             className={`${ds.components.cards.article} hover:shadow-md transition-all duration-300 overflow-hidden hover:border-green-300/60 p-4`}
           >
@@ -356,9 +392,9 @@ function ContentCard({ item }: ContentCardProps) {
             </div>
           </article>
         </a>
-      )
+      );
 
     default:
-      return null
+      return null;
   }
 }

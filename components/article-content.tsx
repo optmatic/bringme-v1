@@ -269,58 +269,64 @@ export function ArticleContent({ article }: ArticleContentProps) {
                 <h3 className="text-lg font-bold text-slate-950 mb-4 font-gothic">
                   In This Article
                 </h3>
-                <nav className="space-y-2">
+                <nav className="toc-container">
                   {sections.map((section) => (
                     <div key={section.id}>
-                      <div className="flex items-center justify-between">
-                        <a
-                          href={`#${section.id}`}
-                          className={`block text-sm transition-colors duration-200 font-inter flex-1 ${
-                            activeSection === section.id
-                              ? "text-green-600 font-medium"
-                              : "text-slate-700 hover:text-slate-900"
-                          }`}
-                        >
-                          {section.title}
-                        </a>
-                        {section.level === 2 && (
-                          <button
-                            onClick={() => toggleSection(section.id)}
-                            className="ml-2 p-1 text-gray-400 hover:text-gray-600 transition-colors duration-200"
-                            aria-label={`Toggle ${section.title} subsections`}
-                          >
-                            {expandedSections.includes(section.id) ? (
-                              <ChevronDown className="h-3 w-3" />
-                            ) : (
-                              <ChevronRight className="h-3 w-3" />
+                      {section.level === 2 && (
+                        <>
+                          <div className="flex items-center justify-between">
+                            <a
+                              href={`#${section.id}`}
+                              className={`toc-h2 ${
+                                activeSection === section.id
+                                  ? "toc-h2-active"
+                                  : ""
+                              }`}
+                            >
+                              {section.title}
+                            </a>
+                            {sections.some(
+                              (s) =>
+                                s.level === 3 && s.id.startsWith(section.id)
+                            ) && (
+                              <button
+                                onClick={() => toggleSection(section.id)}
+                                className="toc-toggle"
+                                aria-label={`Toggle ${section.title} subsections`}
+                              >
+                                {expandedSections.includes(section.id) ? (
+                                  <ChevronDown className="h-3 w-3" />
+                                ) : (
+                                  <ChevronRight className="h-3 w-3" />
+                                )}
+                              </button>
                             )}
-                          </button>
-                        )}
-                      </div>
-
-                      {section.level === 2 &&
-                        expandedSections.includes(section.id) && (
-                          <div className="ml-4 mt-2 space-y-1 border-l border-gray-200 pl-3">
-                            {sections
-                              .filter(
-                                (s) =>
-                                  s.level === 3 && s.id.startsWith(section.id)
-                              )
-                              .map((subsection) => (
-                                <a
-                                  key={subsection.id}
-                                  href={`#${subsection.id}`}
-                                  className={`block text-xs transition-colors duration-200 font-inter ${
-                                    activeSection === subsection.id
-                                      ? "text-green-600 font-medium"
-                                      : "text-slate-600 hover:text-slate-800"
-                                  }`}
-                                >
-                                  {subsection.title}
-                                </a>
-                              ))}
                           </div>
-                        )}
+
+                          {expandedSections.includes(section.id) && (
+                            <div className="toc-subsection">
+                              {sections
+                                .filter(
+                                  (s) =>
+                                    s.level === 3 && s.id.startsWith(section.id)
+                                )
+                                .map((subsection) => (
+                                  <a
+                                    key={subsection.id}
+                                    href={`#${subsection.id}`}
+                                    className={`toc-h3 ${
+                                      activeSection === subsection.id
+                                        ? "toc-h3-active"
+                                        : ""
+                                    }`}
+                                  >
+                                    {subsection.title}
+                                  </a>
+                                ))}
+                            </div>
+                          )}
+                        </>
+                      )}
                     </div>
                   ))}
                 </nav>
