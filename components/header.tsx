@@ -19,6 +19,9 @@ interface HeaderProps {
   activeCategory?: string;
 }
 
+// add background image to header
+const headerBackground = "/images/australian-flora-fauna-bg.png";
+
 export function Header({ activeCategory }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -46,6 +49,19 @@ export function Header({ activeCategory }: HeaderProps) {
     <header
       className={`${ds.components.cards.header} sticky top-0 z-50 relative`}
     >
+      {/* Background image overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${headerBackground})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.12, // Only the image is faded
+          zIndex: 0,
+        }}
+      />
+
       {/* Futuristic gradient accent line */}
       <div className="h-0.5 bg-gradient-to-r from-green-400 via-lime-300 to-green-500 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
@@ -57,7 +73,7 @@ export function Header({ activeCategory }: HeaderProps) {
           {/* Logo Section */}
           <div className="flex flex-col items-start space-y-2 sm:space-y-4">
             <Link href="/" className="group flex-shrink-0">
-              <div className="logo-3d-border px-3 py-1.5 sm:px-4 sm:py-2 transition-all duration-300 group-hover:bg-black group-hover:text-white relative overflow-hidden">
+              <div className="logo-3d-border px-3 py-1.5 sm:px-4 sm:py-2 transition-all duration-300 bg-white group-hover:bg-black group-hover:text-white relative overflow-hidden">
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight font-bokor relative z-10">
                   Bring Me Insight
                 </h1>
@@ -82,7 +98,7 @@ export function Header({ activeCategory }: HeaderProps) {
                   "px-3 py-2 text-sm font-medium transition-all duration-200 font-inter border border-transparent",
                   activeCategoryUpper === item.name
                     ? "bg-gradient-to-r from-green-100 via-lime-50 to-green-100 text-green-800 border-green-200/60"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-gray-100 hover:border-gray-200/60"
+                    : "text-slate-700 hover:text-black hover:shadow-md hover:border-green-300"
                 )}
               >
                 {item.name}
@@ -111,11 +127,11 @@ export function Header({ activeCategory }: HeaderProps) {
         >
           {/* Backdrop with Australian flora pattern */}
           <div
-            className="absolute inset-0 bg-white/95 backdrop-blur-sm"
+            className="absolute inset-0 bg-white/50 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <div
-              className="absolute inset-0 opacity-[0.05]"
+              className="absolute inset-0 opacity-[0.2]"
               style={{
                 backgroundImage: "url('/images/australian-flora-fauna-bg.png')",
                 backgroundSize: "cover",

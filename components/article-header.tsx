@@ -6,16 +6,11 @@ import { cn } from "@/lib/utils";
 import { Clock, User, X, ChevronRight, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ds, getArticleInfoBarStyles } from "@/lib/design-system";
-
-interface Article {
-  title: string;
-  author: string;
-  readTime: string;
-  category: string;
-}
+import Image from "next/image";
+import { GhostPost } from "@/lib/ghost";
 
 interface ArticleHeaderProps {
-  article: Article;
+  article: GhostPost;
 }
 
 // Navigation items - same as main header
@@ -122,7 +117,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
             </button>
           </div>
 
-          {/* Sticky Article Info Bar - Shows on Scroll - COMPLETELY FIXED */}
+          {/* Sticky Article Info Bar - Shows on Scroll */}
           <div
             className={cn(
               "relative w-full transition-all duration-300 ease-in-out overflow-hidden border-t border-gray-200/30",
@@ -131,7 +126,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           >
             <div className="relative">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Mobile Layout - COMPLETELY REDESIGNED FOR BETTER SPACING */}
+                {/* Mobile Layout */}
                 <div className="sm:hidden py-4">
                   <div className="space-y-3">
                     {/* Top row: Author info */}
@@ -144,7 +139,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                       </div>
                       <div>
                         <div className="text-sm font-medium text-slate-800 font-inter">
-                          {article.author}
+                          {article.authors[0]?.name}
                         </div>
                       </div>
                     </div>
@@ -154,18 +149,29 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                       <div className="flex items-center gap-4 text-xs text-slate-600 font-inter">
                         <div className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" aria-hidden="true" />
-                          <span>2024-03-15</span>
+                          <span>
+                            {new Date(article.published_at).toLocaleDateString(
+                              "en-GB",
+                              {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                              }
+                            )}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="h-3 w-3" aria-hidden="true" />
-                          <span>{article.readTime}</span>
+                          <span>{article.reading_time} min read</span>
                         </div>
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium font-inter uppercase tracking-wide border-green-200/60"
-                        >
-                          {article.category}
-                        </Badge>
+                        {article.tags[0] && (
+                          <Badge
+                            variant="secondary"
+                            className="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium font-inter uppercase tracking-wide border-green-200/60"
+                          >
+                            {article.tags[0].name}
+                          </Badge>
+                        )}
                       </div>
 
                       <div className="flex items-center gap-2 flex-shrink-0">
@@ -183,7 +189,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                   </div>
                 </div>
 
-                {/* Desktop Layout - Fixed Alignment */}
+                {/* Desktop Layout */}
                 <div className="hidden sm:flex items-center justify-between py-3">
                   {/* Article Meta */}
                   <div className="flex items-center gap-4 min-w-0 flex-1">
@@ -196,12 +202,14 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
 
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium font-inter uppercase tracking-wide border-green-200/60"
-                        >
-                          {article.category}
-                        </Badge>
+                        {article.tags[0] && (
+                          <Badge
+                            variant="secondary"
+                            className="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium font-inter uppercase tracking-wide border-green-200/60"
+                          >
+                            {article.tags[0].name}
+                          </Badge>
+                        )}
                       </div>
                       <h2 className="text-sm font-semibold text-slate-800 truncate font-gothic pr-4 leading-tight">
                         {article.title}
@@ -209,14 +217,18 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                     </div>
                   </div>
 
-                  {/* Reading Progress & Meta - Fixed Alignment */}
+                  {/* Reading Progress & Meta */}
                   <div className="flex items-center gap-4 flex-shrink-0">
                     <div className="flex items-center gap-2 text-xs text-slate-600 font-inter">
-                      <span className="leading-none">{article.author}</span>
+                      <span className="leading-none">
+                        {article.authors[0]?.name}
+                      </span>
                       <span className="leading-none">•</span>
                       <div className="flex items-center gap-1">
                         <Clock className="h-3 w-3" aria-hidden="true" />
-                        <span className="leading-none">{article.readTime}</span>
+                        <span className="leading-none">
+                          {article.reading_time} min read
+                        </span>
                       </div>
                     </div>
 
@@ -238,7 +250,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           </div>
         </div>
 
-        {/* Creative Mobile Menu Dropdown - FIXED ALIGNMENT, NO SPARKLES */}
+        {/* Mobile Menu Dropdown */}
         <div
           className={cn(
             "lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out",
@@ -264,7 +276,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
 
           {/* Menu Container */}
           <div className="relative h-full flex flex-col">
-            {/* Header - PROPERLY ALIGNED */}
+            {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200/60">
               <Link
                 href="/"
@@ -285,7 +297,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
               </button>
             </div>
 
-            {/* Navigation Items - ALIGNED WITH LOGO, NO SPARKLES */}
+            {/* Navigation Items */}
             <nav className="flex-1 py-8 px-4">
               <ul className="space-y-6">
                 {navItems.map((item, index) => {
@@ -310,7 +322,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                           )}
                         />
 
-                        {/* Menu item text with hover effect - REMOVED SPARKLE ICON */}
+                        {/* Menu item text with hover effect */}
                         <span className="text-2xl font-bold font-gothic tracking-tight group-hover:translate-x-1 transition-transform duration-200 ml-6">
                           {item.name}
                         </span>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import FloraFauna from "@/public/images/australian-flora-fauna-bg.png";
+
 export function Footer() {
   return (
     <footer className="relative mt-16 overflow-hidden">
@@ -7,11 +9,11 @@ export function Footer() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "url('/images/australian-flora-fauna-bg.png')",
+          backgroundImage: `url(${FloraFauna.src})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.08, // Matching the header opacity
+          opacity: 0.2, // Matching the header opacity
         }}
       />
 
@@ -25,13 +27,13 @@ export function Footer() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
       </div>
 
-      <div className="relative bg-white/85 backdrop-blur-sm border border-gray-200/60">
+      <div className="relative bg-white/50 backdrop-blur-sm border border-gray-200/60">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Brand Section */}
             <div className="space-y-4">
               <Link href="/" className="inline-block group">
-                <div className="logo-3d-border px-3 py-1.5 transition-all duration-300 group-hover:bg-black group-hover:text-white relative overflow-hidden">
+                <div className="logo-3d-border px-3 py-1.5 transition-all duration-300 bg-white group-hover:bg-black group-hover:text-white relative overflow-hidden">
                   <h3 className="text-base sm:text-lg font-bold font-bokor relative z-10">
                     Bring Me Insight
                   </h3>
