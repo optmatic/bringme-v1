@@ -373,7 +373,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
               </div>
 
               <div
-                className={`${ds.components.cards.sidebar} p-0 overflow-hidden border border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
+                className={`${ds.components.cards.sidebar} p-0 overflow-hidden border  border-transparent shadow-[0_1px_6px_0_rgba(163,230,53,0.06)]`}
                 style={{
                   borderImage:
                     "linear-gradient(135deg, #e0fbe6, #d9f99d, #f0fdf4) 1",
@@ -381,7 +381,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
               >
                 <button
                   onClick={shareArticle}
-                  className="flex items-center gap-2 w-full p-4 text-green-600 hover:bg-green-50/50 transition-colors font-inter text-sm"
+                  className="flex items-center gap-2 w-full p-4 text-green-600 transition-colors font-inter text-sm"
                 >
                   <Share2 className="h-4 w-4" />
                   <span>Share article</span>

@@ -275,7 +275,7 @@ html {
 
 /* === Table of Contents Styles === */
 .toc-h2 {
-  @apply text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors duration-200 px-2 py-1.5 rounded-md hover:bg-gray-50/50;
+  @apply text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors duration-200 px-2 py-1.5 rounded-md hover:bg-green-50/50;
 }
 
 .toc-h2-active {
