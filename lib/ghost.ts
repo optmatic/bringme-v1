@@ -1,8 +1,11 @@
 import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 
 // Validate required environment variables
-const GHOST_URL = process.env.GHOST_URL;
-const GHOST_CONTENT_API_KEY = process.env.GHOST_CONTENT_API_KEY;
+// const GHOST_URL = process.env.GHOST_URL;
+// const GHOST_CONTENT_API_KEY = process.env.GHOST_CONTENT_API_KEY;
+
+const GHOST_URL = process.env.NEXT_PUBLIC_GHOST_URL;
+const GHOST_CONTENT_API_KEY = process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY;
 
 // Debug logging for environment variables
 console.log("Ghost Configuration:", {
