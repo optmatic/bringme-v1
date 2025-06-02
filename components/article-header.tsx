@@ -61,7 +61,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
         <div
           className="absolute inset-0 opacity-[0.08] pointer-events-none"
           style={{
-            backgroundImage: "url('/images/australian-flora-fauna-bg.png')",
+            backgroundImage: "url('/images/australian-flora-fauna-bg.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -267,7 +267,8 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
             <div
               className="absolute inset-0 opacity-[0.05]"
               style={{
-                backgroundImage: "url('/images/australian-flora-fauna-bg.png')",
+                backgroundImage:
+                  "url('/images/australian-flora-fauna-bg.webp')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import FloraFauna from "@/public/images/australian-flora-fauna-bg.png";
+import FloraFauna from "@/public/images/australian-flora-fauna-bg.webp";
 
 export function Footer() {
   return (

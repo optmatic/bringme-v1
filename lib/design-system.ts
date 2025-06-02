@@ -199,7 +199,7 @@ export const designSystem = {
         "flora-fauna": {
           className: "bg-white",
           overlay: {
-            backgroundImage: "url('/images/australian-flora-fauna-bg.png')",
+            backgroundImage: "url('/images/australian-flora-fauna-bg.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

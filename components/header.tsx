@@ -20,7 +20,7 @@ interface HeaderProps {
 }
 
 // add background image to header
-const headerBackground = "/images/australian-flora-fauna-bg.png";
+const headerBackground = "/images/australian-flora-fauna-bg.webp";
 
 export function Header({ activeCategory }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -133,7 +133,8 @@ export function Header({ activeCategory }: HeaderProps) {
             <div
               className="absolute inset-0 opacity-[0.2]"
               style={{
-                backgroundImage: "url('/images/australian-flora-fauna-bg.png')",
+                backgroundImage:
+                  "url('/images/australian-flora-fauna-bg.webp')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

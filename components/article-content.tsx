@@ -217,11 +217,12 @@ export function ArticleContent({ article }: ArticleContentProps) {
                   <div className="relative w-full aspect-[4/3]">
                     <Image
                       src={article.feature_image}
-                      alt=""
+                      alt={article.title}
                       fill
-                      className="object-cover shadow-sm shadow-green-900"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover rounded-lg shadow-sm shadow-green-900/10"
                       priority
-                      role="presentation"
+                      quality={85}
                     />
                   </div>
                 </div>
