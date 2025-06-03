@@ -40,7 +40,7 @@ const getCategoryData = (category: string) => {
   return categoryMap[category] || null;
 };
 
-export default function CategoryPage({
+export default async function CategoryPage({
   params,
 }: {
   params: { category: string };

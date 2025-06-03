@@ -44,7 +44,7 @@ try {
 const api = new GhostContentAPI({
   url: GHOST_URL,
   key: GHOST_CONTENT_API_KEY,
-  version: "v5.0",
+  version: "v3",
 });
 
 export interface GhostPost extends PostOrPage {
@@ -84,6 +84,7 @@ async function testGhostConnection() {
       headers: {
         Accept: "application/json",
       },
+      next: { revalidate: 60 }, // Cache for 60 seconds
     });
 
     if (!response.ok) {
