@@ -1,6 +1,7 @@
-import type React from "react"
-import type { Metadata } from "next"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import "./globals.css";
+import ComingSoon from "./components/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Bring Me Insight - Australian Politics & Society",
@@ -14,20 +15,34 @@ export const metadata: Metadata = {
       },
     ],
   },
-    generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
+
+// Set this to false when you want to launch the site
+const IS_COMING_SOON = true;
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Bokor&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin=""
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bokor&display=swap"
+          rel="stylesheet"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
@@ -38,8 +53,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden overflow-y-auto font-inter">
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          {IS_COMING_SOON ? <ComingSoon /> : children}
+        </main>
       </body>
     </html>
-  )
+  );
 }
