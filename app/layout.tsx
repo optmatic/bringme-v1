@@ -15,7 +15,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  generator: "v0.dev",
 };
 
 // Set this to false when you want to launch the site
