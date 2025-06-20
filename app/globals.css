@@ -236,6 +236,10 @@ html {
 }
 
 /* === Design System Prose Overrides === */
+
+.prose h1 {
+  @apply text-4xl bg-gradient-to-r from-green-100/60 to-green-50/20 font-black font-gothic !mt-4 mb-2 px-6 py-2 inline-block rounded-md;
+}
 .prose h2 {
   @apply text-3xl bg-gradient-to-r from-green-100/60 to-green-50/20 font-black font-gothic !mt-16 mb-2 px-6 py-2 inline-block rounded-md;
 }
@@ -245,7 +249,7 @@ html {
 }
 
 .prose h3 {
-  @apply text-xl bg-gradient-to-r from-lime-100/40 to-lime-50/20 font-bold font-gothic !mt-12 mb-2 px-3 py-1.5 inline-block rounded;
+  @apply text-xl bg-gradient-to-r from-lime-100/40 to-lime-50/20 font-bold font-gothic !mt-8 mb-2 px-3 py-1.5 inline-block rounded;
 }
 .prose a {
   @apply text-green-600 underline decoration-green-400 decoration-2 hover:text-green-700 hover:decoration-green-500 transition-colors duration-200;
