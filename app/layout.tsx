@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 // Set this to false when you want to launch the site
-const IS_COMING_SOON = true;
+const IS_COMING_SOON = false;
 
 export default function RootLayout({
   children,

@@ -1,24 +1,27 @@
 import { ArticleHeader } from "@/components/article-header";
 import { ArticleContent } from "@/components/article-content";
 import { Footer } from "@/components/footer";
-import { getPost } from "@/lib/ghost";
+import { getArticle } from "@/lib/keystatic";
 import { notFound } from "next/navigation";
 
 export default async function ArticlePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const article = await getArticle(slug);
 
-  if (!post) {
+  if (!article) {
     notFound();
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <ArticleHeader article={post} />
-      <ArticleContent article={post} />
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50/30 via-lime-50/20 to-green-50/30">
+      <ArticleHeader article={article} />
+      <main className="flex-1 w-full">
+        <ArticleContent article={article} />
+      </main>
       <Footer />
     </div>
   );

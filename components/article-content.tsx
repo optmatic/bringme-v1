@@ -13,10 +13,10 @@ import {
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ds, getHeadingClasses, getLinkClasses } from "@/lib/design-system";
-import { GhostPost } from "@/lib/ghost";
+import { KeystaticArticle } from "@/lib/keystatic-types";
 
 interface ArticleContentProps {
-  article: GhostPost;
+  article: KeystaticArticle;
 }
 
 export function ArticleContent({ article }: ArticleContentProps) {
@@ -30,7 +30,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
   // Extract sections from article content
   const sections =
-    article.html.match(/<h[2-3][^>]*>.*?<\/h[2-3]>/g)?.map((heading) => {
+    article.content.match(/<h[2-3][^>]*>.*?<\/h[2-3]>/g)?.map((heading) => {
       const id =
         heading.match(/id="([^"]+)"/)?.[1] ||
         heading.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -151,13 +151,11 @@ export function ArticleContent({ article }: ArticleContentProps) {
                   <User className="h-5 w-5 text-white" aria-hidden="true" />
                 </div>
                 <div className="flex items-center gap-4 text-sm text-slate-700 font-inter">
-                  <span className="font-medium">
-                    {article.authors[0]?.name}
-                  </span>
+                  <span className="font-medium">{article.author.name}</span>
                   <div className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" aria-hidden="true" />
                     <span>
-                      {new Date(article.published_at).toLocaleDateString(
+                      {new Date(article.publishedAt).toLocaleDateString(
                         "en-GB",
                         {
                           year: "numeric",
@@ -169,7 +167,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="h-3 w-3" aria-hidden="true" />
-                    <span>{article.reading_time} min read</span>
+                    <span>{article.readingTime} min read</span>
                   </div>
                 </div>
               </div>
@@ -212,11 +210,11 @@ export function ArticleContent({ article }: ArticleContentProps) {
                 </p>
               </div>
 
-              {article.feature_image && (
+              {article.featureImage && (
                 <div className="lg:col-span-1">
                   <div className="relative w-full aspect-[4/3]">
                     <Image
-                      src={article.feature_image}
+                      src={article.featureImage}
                       alt={article.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -240,8 +238,8 @@ export function ArticleContent({ article }: ArticleContentProps) {
             ref={contentRef}
           >
             <div
-              className={`${ds.spacing.sections.gap} text-slate-950 leading-relaxed font-inter text-sm`}
-              dangerouslySetInnerHTML={{ __html: article.html }}
+              className={`${ds.spacing.sections.gap} prose prose-slate max-w-none prose-headings:font-gothic prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:font-inter prose-p:leading-relaxed prose-a:text-green-600 prose-a:no-underline hover:prose-a:text-green-700 hover:prose-a:underline prose-strong:text-slate-900 prose-code:text-green-600 prose-code:bg-green-50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none`}
+              dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </article>
 
@@ -255,9 +253,9 @@ export function ArticleContent({ article }: ArticleContentProps) {
           >
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs text-slate-700 font-inter">Tagged:</span>
-              {article.tags.map((tag) => (
+              {article.tags.map((tag, index) => (
                 <Badge
-                  key={tag.id}
+                  key={index}
                   variant="secondary"
                   className="bg-white/80 text-green-700 text-xs px-2 py-0.5 font-inter border border-green-100/50"
                 >

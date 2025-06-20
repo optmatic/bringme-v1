@@ -7,10 +7,10 @@ import { Clock, User, X, ChevronRight, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ds, getArticleInfoBarStyles } from "@/lib/design-system";
 import Image from "next/image";
-import { GhostPost } from "@/lib/ghost";
+import { KeystaticArticle } from "@/lib/keystatic-types";
 
 interface ArticleHeaderProps {
-  article: GhostPost;
+  article: KeystaticArticle;
 }
 
 // Navigation items - same as main header
@@ -139,7 +139,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                       </div>
                       <div>
                         <div className="text-sm font-medium text-slate-800 font-inter">
-                          {article.authors[0]?.name}
+                          {article.author.name}
                         </div>
                       </div>
                     </div>
@@ -150,7 +150,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                         <div className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" aria-hidden="true" />
                           <span>
-                            {new Date(article.published_at).toLocaleDateString(
+                            {new Date(article.publishedAt).toLocaleDateString(
                               "en-GB",
                               {
                                 year: "numeric",
@@ -162,7 +162,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="h-3 w-3" aria-hidden="true" />
-                          <span>{article.reading_time} min read</span>
+                          <span>{article.readingTime} min read</span>
                         </div>
                         {article.tags[0] && (
                           <Badge
@@ -199,49 +199,52 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                         aria-hidden="true"
                       />
                     </div>
-
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        {article.tags[0] && (
-                          <Badge
-                            variant="secondary"
-                            className="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium font-inter uppercase tracking-wide border-green-200/60"
-                          >
-                            {article.tags[0].name}
-                          </Badge>
-                        )}
+                      <div className="text-sm font-medium text-slate-800 font-inter truncate">
+                        {article.author.name}
                       </div>
-                      <h2 className="text-sm font-semibold text-slate-800 truncate font-gothic pr-4 leading-tight">
-                        {article.title}
-                      </h2>
                     </div>
                   </div>
 
-                  {/* Reading Progress & Meta */}
-                  <div className="flex items-center gap-4 flex-shrink-0">
-                    <div className="flex items-center gap-2 text-xs text-slate-600 font-inter">
-                      <span className="leading-none">
-                        {article.authors[0]?.name}
+                  {/* Article Info */}
+                  <div className="flex items-center gap-4 text-sm text-slate-600 font-inter">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3" aria-hidden="true" />
+                      <span>
+                        {new Date(article.publishedAt).toLocaleDateString(
+                          "en-GB",
+                          {
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                          }
+                        )}
                       </span>
-                      <span className="leading-none">•</span>
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" aria-hidden="true" />
-                        <span className="leading-none">
-                          {article.reading_time} min read
-                        </span>
-                      </div>
                     </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" aria-hidden="true" />
+                      <span>{article.readingTime} min read</span>
+                    </div>
+                    {article.tags[0] && (
+                      <Badge
+                        variant="secondary"
+                        className="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium font-inter uppercase tracking-wide border-green-200/60"
+                      >
+                        {article.tags[0].name}
+                      </Badge>
+                    )}
+                  </div>
 
-                    <div className="flex items-center gap-2">
-                      <div className="text-xs font-medium text-slate-800 font-inter leading-none">
-                        {Math.round(readingProgress)}%
-                      </div>
-                      <div className="w-12 h-1.5 bg-green-200 overflow-hidden">
-                        <div
-                          className="h-full bg-green-500 transition-all duration-300 ease-out"
-                          style={{ width: `${readingProgress}%` }}
-                        />
-                      </div>
+                  {/* Reading Progress */}
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="text-sm font-medium text-slate-800 font-inter">
+                      {Math.round(readingProgress)}%
+                    </div>
+                    <div className="w-16 h-1.5 bg-green-200 overflow-hidden">
+                      <div
+                        className="h-full bg-green-500 transition-all duration-300 ease-out"
+                        style={{ width: `${readingProgress}%` }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -250,110 +253,52 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
-        <div
-          className={cn(
-            "lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out",
-            isMobileMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          {/* Backdrop with Australian flora pattern */}
-          <div
-            className="absolute inset-0 bg-white/95 backdrop-blur-sm"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <div
-              className="absolute inset-0 opacity-[0.05]"
-              style={{
-                backgroundImage:
-                  "url('/images/australian-flora-fauna-bg.webp')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-          </div>
-
-          {/* Menu Container */}
-          <div className="relative h-full flex flex-col">
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200/60">
-              <Link
-                href="/"
-                className="group"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <div className="logo-3d-border px-3 py-1.5 transition-all duration-300 group-hover:bg-black group-hover:text-white relative overflow-hidden">
-                  <h1 className="text-xl font-bold tracking-tight font-bokor relative z-10">
-                    Bring Me Insight
-                  </h1>
-                </div>
-              </Link>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-green-50 text-green-600 border border-green-200/60"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            {/* Navigation Items */}
-            <nav className="flex-1 py-8 px-4">
-              <ul className="space-y-6">
-                {navItems.map((item, index) => {
-                  const isActive = item.name === "POLITICS"; // Hardcoded for article page
-                  return (
-                    <li key={item.name} className="relative">
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={cn(
-                          "flex items-center group py-3 transition-all duration-300",
-                          isActive ? "text-green-600" : "text-slate-700"
-                        )}
-                      >
-                        {/* Animated indicator */}
-                        <div
-                          className={cn(
-                            "absolute left-0 w-1.5 h-12 bg-gradient-to-b from-green-400 to-lime-300 rounded-r-full transition-all duration-300",
-                            isActive
-                              ? "opacity-100"
-                              : "opacity-0 group-hover:opacity-50"
-                          )}
-                        />
-
-                        {/* Menu item text with hover effect */}
-                        <span className="text-2xl font-bold font-gothic tracking-tight group-hover:translate-x-1 transition-transform duration-200 ml-6">
-                          {item.name}
-                        </span>
-
-                        {/* Arrow indicator */}
-                        <ChevronRight
-                          className={cn(
-                            "ml-auto h-5 w-5 transition-all duration-300",
-                            isActive
-                              ? "opacity-100 text-green-500"
-                              : "opacity-0 group-hover:opacity-70 text-slate-400"
-                          )}
-                        />
-                      </Link>
-
-                      {/* Animated underline */}
-                      <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent mt-3 opacity-70" />
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-
-            {/* Footer */}
-            <div className="p-6 text-center text-sm text-slate-500 font-inter">
-              <p>Australia in Focus. The World in Frame.</p>
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden fixed inset-0 z-50 bg-black/50">
+            <div className="absolute top-0 right-0 h-full w-80 bg-white shadow-xl">
+              <div className="flex items-center justify-between p-4 border-b">
+                <h2 className="text-lg font-semibold">Menu</h2>
+                <button
+                  onClick={toggleMobileMenu}
+                  className="p-2 hover:bg-gray-100 rounded"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <nav className="p-4">
+                {navItems.map((item, index) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center justify-between py-3 px-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+                ))}
+              </nav>
             </div>
           </div>
-        </div>
+        )}
       </header>
     </>
   );
+}
+
+function fixImageUrl(image: any): string | undefined {
+  if (!image) return undefined;
+  if (typeof image === "string") {
+    if (image.startsWith("http://") || image.startsWith("https://"))
+      return image;
+    if (!image.startsWith("/")) return `/${image}`;
+    return image;
+  }
+  // If it's an object (Keystatic image field), use .src
+  if (typeof image === "object" && image.src) {
+    if (image.src.startsWith("/")) return image.src;
+    return `/${image.src}`;
+  }
+  return undefined;
 }

@@ -43,16 +43,17 @@ const getCategoryData = (category: string) => {
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-  const category = params.category.toLowerCase();
+  const { category } = await params;
+  const categoryLower = category.toLowerCase();
 
   // Check if the category is valid
-  if (!validCategories.includes(category)) {
+  if (!validCategories.includes(categoryLower)) {
     notFound();
   }
 
-  const categoryData = getCategoryData(category);
+  const categoryData = getCategoryData(categoryLower);
 
   if (!categoryData) {
     notFound();
@@ -60,7 +61,7 @@ export default async function CategoryPage({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50/30 via-lime-50/20 to-green-50/30">
-      <Header activeCategory={category} />
+      <Header activeCategory={categoryLower} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <CategoryHero
           title={categoryData.title}
@@ -68,10 +69,10 @@ export default async function CategoryPage({
         />
 
         {/* Render different content based on category */}
-        {category === "discover" ? (
+        {categoryLower === "discover" ? (
           <DiscoverContent />
         ) : (
-          <CategoryArticleList category={category} />
+          <CategoryArticleList category={categoryLower} />
         )}
       </main>
       <Footer />
